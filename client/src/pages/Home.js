@@ -1,6 +1,7 @@
 
 import React from 'react';
 import '../styles/pages/Home.css';
+import Grid from '../components/Grid.js';
 
 const Home = () => {
 
@@ -8,7 +9,7 @@ const Home = () => {
 
 		<>	
 			<div className="home-page">
-				Hello there !
+				<Grid />
 			</div>
 		</>	
 	);
