@@ -1,9 +1,14 @@
+
 import './App.css';
+import Routes from './components/routes/index.js'
+
 
 function App() {
   return (
-    <div className="App">
-    </div>
+
+  	<>
+		<Routes />
+    </>
   );
 }
 
