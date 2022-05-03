@@ -7,7 +7,10 @@ const Digit = (props) => {
 
 	return (
 
-		<div className="digit">{props.digit}</div>
+		<div className="digit"
+		>
+			{props.digit}
+		</div>
 	);
 }
 
