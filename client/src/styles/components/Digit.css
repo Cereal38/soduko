@@ -22,5 +22,5 @@
 
 	.digit:hover {
 
-		background-color: #CCCCCC;
+		-webkit-filter:brightness(75%);
 	}

@@ -1,23 +1,30 @@
 
-.grid {
+.grid-box {
 	display: flex;
-	flex-direction: row;
-	flex-flow: row wrap;
-
-	height: 450px;
-	width: 450px;
+	flex-direction: column;
+	justify-content: space-between;
+	align-items: center;
 }
 
-.grid__big-square {
-	display: flex;
-	flex-direction: row;
-	flex-flow: row wrap;
+	.grid-box__grid {
+		display: flex;
+		flex-direction: row;
+		flex-flow: row wrap;
 
-	height: 150px;
-	width: 150px;
+		height: 450px;
+		width: 450px;
+	}
 
-	border: 1px black solid;
+	.grid__big-square {
+		display: flex;
+		flex-direction: row;
+		flex-flow: row wrap;
 
-	background-color: black;
-}
+		height: 150px;
+		width: 150px;
+
+		border: 1px black solid;
+
+		background-color: black;
+	}
 

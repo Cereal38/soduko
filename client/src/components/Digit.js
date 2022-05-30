@@ -7,9 +7,12 @@ const Digit = (props) => {
 
 	return (
 
-		<div className="digit"
+		<div
+		className="digit"
+		onClick={props.onPress}
+		style={{backgroundColor: props.bgColor}}
 		>
-			{props.digit}
+			{props.digit == 0 ? "" : props.digit}
 		</div>
 	);
 }

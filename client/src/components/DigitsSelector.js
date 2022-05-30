@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import '../styles/components/DigitsSelector.css';
 
 
-const DigitsSelector = () => {
+const DigitsSelector = ({ select, }) => {
 	
 	const [digits] = useState(["1", "2", "3", "4", "5", "6", "7", "8", "9"])
 
@@ -14,7 +14,8 @@ const DigitsSelector = () => {
 			{digits.map((digit, index) =>
 				
 				<div className="digits-selector__digit"
-				key={`${digit}-${index}`}>
+				key={`${digit}-${index}`}
+				onClick={() => select(digit)} >
 					
 					{digit}
 				</div>
