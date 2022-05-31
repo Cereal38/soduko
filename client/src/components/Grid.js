@@ -1,5 +1,5 @@
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import '../styles/components/Grid.css';
 import Digit from './Digit.js';
 import DigitsSelector from './DigitsSelector.js';
@@ -15,6 +15,18 @@ const grid = [
 	[[0, 4, 1], [5, 9, 2], [0, 0, 3]], 
 	[[5, 9, 0], [6, 8, 7], [0, 2, 0]], 
 	[[6, 2, 0], [4, 3, 1], [0, 5, 0]],
+]
+
+const solution = [
+	[[2, 3, 4], [1, 5, 6], [9, 8, 7]], 
+	[[8, 1, 9], [7, 4, 2], [3, 6, 5]], 
+	[[5, 7, 6], [9, 8, 3], [2, 1, 4]], 
+	[[4, 7, 5], [6, 1, 8], [3, 2, 9]], 
+	[[9, 3, 8], [2, 7, 4], [1, 5, 6]], 
+	[[1, 6, 2], [3, 9, 5], [7, 4, 8]], 
+	[[8, 4, 1], [5, 9, 2], [7, 6, 3]], 
+	[[5, 9, 3], [6, 8, 7], [4, 2, 1]], 
+	[[6, 2, 7], [4, 3, 1], [8, 5, 9]],
 ]
 
 // Create an array full of empties string (Same format as grids)
@@ -42,10 +54,27 @@ const Grid = () => {
 	const [userGrid, setUserGrid] = useState(grid);
 	const [colorsGrid, setColorsGrid] = useState(createEmptyArray());
 	const [selectedCell, setSelectedCell] = useState([0, 0, 0])
+	const [showDigitsSelector, setShowDigitsSelector] = useState(false);
 
-	// Get digit selected in the digitsSelector
-	const [selectedDigit, setSelectedDigit] = useState();
-	const selectDigit = (digit) => { setSelectedDigit(digit); }
+	// Get digit selected in digitsSelector and add it in the grid
+	const selectDigit = (digit) => {
+		
+		// Hide DigitsSelector when a digit is selected
+		setShowDigitsSelector(false);
+
+		// Get index of the selected cell
+		let [ indexBlock, indexLine, indexDigit ] = selectedCell;
+
+		// Check if the selected digit is the right one
+		if (digit == solution[indexBlock][indexLine][indexDigit]) {
+
+			// Change the userGrid with new digit
+			let tempUserGrid = userGrid;
+			tempUserGrid[indexBlock][indexLine][indexDigit] = digit;
+			setUserGrid(tempUserGrid); 
+
+		} else { alert("Erreur !"); }
+	}
 
 	// Allow to refresh components (MAYBE DELETE)
 	const [refresh, setRefresh] = useState(0);
@@ -65,9 +94,7 @@ const Grid = () => {
 			setColorsGrid(tempColorsGrid);
 
 			// Show digits selector panel on the screen
-			changeShowDigitsSelector(true);
-
-			console.log(selectedCell);
+			setShowDigitsSelector(true);
 		}
 
 		else if (userGrid[indexBlock][indexLine][indexDigit] !== 0) {
@@ -76,13 +103,10 @@ const Grid = () => {
 			setColorsGrid(createEmptyArray());
 
 			// Hide digits selector panel on the screen
-			changeShowDigitsSelector(false);
+			setShowDigitsSelector(false);
 		}
 	}
-
-	const [showDigitsSelector, setShowDigitsSelector] = useState(false);
-	function changeShowDigitsSelector(newState) { setShowDigitsSelector(newState); }
-
+	
 	return (
 		<div className="grid-box">
 
@@ -117,8 +141,6 @@ const Grid = () => {
 				:
 				<div style={{height: "40px"}}></div>
 			}
-
-			<Digit digit={selectedDigit} />
 
 		</div>
 	);
