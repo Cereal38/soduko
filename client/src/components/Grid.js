@@ -1,20 +1,23 @@
 
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
+
 import '../styles/components/Grid.css';
+
 import Digit from './Digit.js';
 import DigitsSelector from './DigitsSelector.js';
+import ScorePanel from './ScorePanel.js';
 
 
 const grid = [
-	[[2, 3, 0], [1, 5, 6], [0, 0, 7]], 
-	[[0, 1, 9], [7, 0, 0], [0, 6, 0]], 
-	[[5, 7, 6], [0, 8, 3], [2, 0, 4]], 
-	[[0, 7, 5], [0, 1, 0], [3, 2, 0]], 
-	[[0, 3, 0], [0, 7, 0], [0, 5, 6]], 
-	[[1, 6, 2], [0, 9, 0], [0, 4, 8]], 
-	[[0, 4, 1], [5, 9, 2], [0, 0, 3]], 
-	[[5, 9, 0], [6, 8, 7], [0, 2, 0]], 
-	[[6, 2, 0], [4, 3, 1], [0, 5, 0]],
+	[[2, 3, 4], [1, 5, 6], [9, 8, 7]], 
+	[[8, 1, 9], [7, 4, 2], [3, 6, 5]], 
+	[[5, 7, 6], [9, 8, 3], [2, 1, 4]], 
+	[[4, 7, 5], [6, 1, 8], [3, 2, 9]], 
+	[[9, 3, 8], [2, 7, 4], [1, 5, 6]], 
+	[[1, 6, 2], [3, 9, 5], [7, 4, 8]], 
+	[[8, 4, 1], [5, 9, 2], [7, 6, 3]], 
+	[[5, 9, 3], [6, 8, 7], [4, 2, 1]], 
+	[[6, 2, 7], [4, 3, 1], [8, 5, 0]],
 ]
 
 const solution = [
@@ -29,8 +32,8 @@ const solution = [
 	[[6, 2, 7], [4, 3, 1], [8, 5, 9]],
 ]
 
-// Create an array full of empties string (Same format as grids)
-function createEmptyArray() {
+// Create an array full of 'content' given in arg (Same format as grids)
+function createArray(content) {
 
 	let array = [];
 	for (let i = 0; i < 9; i++) {
@@ -41,7 +44,7 @@ function createEmptyArray() {
 
 			array[i].push([]);
 
-			for (let k = 0; k < 3; k++) { array[i][j].push(""); }
+			for (let k = 0; k < 3; k++) { array[i][j].push(content); }
 		}
 	}
 
@@ -52,9 +55,11 @@ const Grid = () => {
 	
 
 	const [userGrid, setUserGrid] = useState(grid);
-	const [colorsGrid, setColorsGrid] = useState(createEmptyArray());
+	const [colorsGrid, setColorsGrid] = useState(createArray(""));
+	const [textColorGrid, setTextColorGrid] = useState(createArray("black"))
 	const [selectedCell, setSelectedCell] = useState([0, 0, 0])
 	const [showDigitsSelector, setShowDigitsSelector] = useState(false);
+	const [scoreCounter, setScoreCounter] = useState(0);
 
 	// Get digit selected in digitsSelector and add it in the grid
 	const selectDigit = (digit) => {
@@ -66,14 +71,30 @@ const Grid = () => {
 		let [ indexBlock, indexLine, indexDigit ] = selectedCell;
 
 		// Check if the selected digit is the right one
-		if (digit == solution[indexBlock][indexLine][indexDigit]) {
+		if (parseInt(digit) === solution[indexBlock][indexLine][indexDigit]) {
+		
+			// Change color to add a blue digit in the grid
+			let tempTextColorGrid = textColorGrid;
+			tempTextColorGrid[indexBlock][indexLine][indexDigit] = "blue";
+			setTextColorGrid(tempTextColorGrid);
 
 			// Change the userGrid with new digit
 			let tempUserGrid = userGrid;
-			tempUserGrid[indexBlock][indexLine][indexDigit] = digit;
+			tempUserGrid[indexBlock][indexLine][indexDigit] = parseInt(digit);
 			setUserGrid(tempUserGrid); 
 
-		} else { alert("Erreur !"); }
+		} else { 
+
+			// Add 1 to error counter
+			setScoreCounter(scoreCounter + 1);
+		}
+
+		// Check if the grid is full if yes end game
+		if (JSON.stringify(userGrid) === JSON.stringify(solution)) {
+
+			alert("Congratulation ! Completed with " + scoreCounter + " errors !")
+		}
+
 	}
 
 	// Allow to refresh components (MAYBE DELETE)
@@ -89,7 +110,7 @@ const Grid = () => {
 			setSelectedCell([indexBlock, indexLine, indexDigit]);
 
 			// Highlight cell clicked
-			const tempColorsGrid = createEmptyArray();
+			const tempColorsGrid = createArray("");
 			tempColorsGrid[indexBlock][indexLine][indexDigit] = "#FFC133";
 			setColorsGrid(tempColorsGrid);
 
@@ -100,7 +121,7 @@ const Grid = () => {
 		else if (userGrid[indexBlock][indexLine][indexDigit] !== 0) {
 
 			// Reset last highligted cell
-			setColorsGrid(createEmptyArray());
+			setColorsGrid(createArray(""));
 
 			// Hide digits selector panel on the screen
 			setShowDigitsSelector(false);
@@ -110,6 +131,7 @@ const Grid = () => {
 	return (
 		<div className="grid-box">
 
+			<ScorePanel score={scoreCounter} />
 			<div className="grid-box__grid">
 				
 				{ userGrid.map((block, indexBlock) =>
@@ -125,7 +147,8 @@ const Grid = () => {
 								key={`${digit}-${indexDigit}`}
 								onPress={() => emptyClicked(indexBlock, indexLine, indexDigit)}
 								digit={digit}
-								bgColor={colorsGrid[indexBlock][indexLine][indexDigit]} />
+								bgColor={colorsGrid[indexBlock][indexLine][indexDigit]}
+								textColor={textColorGrid[indexBlock][indexLine][indexDigit]} />
 							)
 						)}
 
