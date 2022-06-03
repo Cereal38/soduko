@@ -1,18 +1,20 @@
 
 import React from 'react';
+import { Link } from 'react-router-dom';
+
 import '../styles/pages/Home.css';
-import Grid from '../components/Grid.js';
+
 
 const Home = () => {
 
 	return (
 
-		<>	
-			<div className="home-page">
-				<Grid />
-			</div>
-		</>	
-	);
+		<div className="home">
+			
+			<Link className="home__play-button" to="/game">Play</Link>
+
+		</div>
+	)
 }
 
 export default Home;

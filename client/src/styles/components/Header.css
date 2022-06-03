@@ -1,0 +1,19 @@
+
+.header {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	
+	height: 15vh;
+}
+
+	.header__title {
+
+		margin: 0px;
+		padding: 0px;
+
+		font-size: 4em;
+		font-weight: bold;
+		color: #FFC133;
+	}
+
