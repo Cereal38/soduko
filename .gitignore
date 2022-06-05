@@ -5,3 +5,7 @@ node_modules
 # client
 client/node_modules
 
+# Pycharm
+.idea/
+/Pipfile
+/Pipfile.lock
