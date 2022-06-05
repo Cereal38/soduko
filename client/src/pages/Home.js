@@ -4,16 +4,22 @@ import { Link } from 'react-router-dom';
 
 import '../styles/pages/Home.css';
 
+import Header from '../components/Header.js';
+
 
 const Home = () => {
 
 	return (
 
-		<div className="home">
-			
-			<Link className="home__play-button" to="/game">Play</Link>
+		<>
+			<Header />
 
-		</div>
+			<div className="home">
+				
+				<Link className="home__play-button" to="/game">Play</Link>
+
+			</div>
+		</>
 	)
 }
 

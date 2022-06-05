@@ -7,30 +7,10 @@ import Digit from './Digit.js';
 import DigitsSelector from './DigitsSelector.js';
 import ScorePanel from './ScorePanel.js';
 
+import grids from '../database/allGrids.json';
 
-const grid = [
-	[[2, 3, 4], [1, 5, 6], [9, 8, 7]], 
-	[[8, 1, 9], [7, 4, 2], [3, 6, 5]], 
-	[[5, 7, 6], [9, 8, 3], [2, 1, 4]], 
-	[[4, 7, 5], [6, 1, 8], [3, 2, 9]], 
-	[[9, 3, 8], [2, 7, 4], [1, 5, 6]], 
-	[[1, 6, 2], [3, 9, 5], [7, 4, 8]], 
-	[[8, 4, 1], [5, 9, 2], [7, 6, 3]], 
-	[[5, 9, 3], [6, 8, 7], [4, 2, 1]], 
-	[[6, 2, 7], [4, 3, 1], [8, 5, 0]],
-]
-
-const solution = [
-	[[2, 3, 4], [1, 5, 6], [9, 8, 7]], 
-	[[8, 1, 9], [7, 4, 2], [3, 6, 5]], 
-	[[5, 7, 6], [9, 8, 3], [2, 1, 4]], 
-	[[4, 7, 5], [6, 1, 8], [3, 2, 9]], 
-	[[9, 3, 8], [2, 7, 4], [1, 5, 6]], 
-	[[1, 6, 2], [3, 9, 5], [7, 4, 8]], 
-	[[8, 4, 1], [5, 9, 2], [7, 6, 3]], 
-	[[5, 9, 3], [6, 8, 7], [4, 2, 1]], 
-	[[6, 2, 7], [4, 3, 1], [8, 5, 9]],
-]
+// Choose a grid in DB
+const gridNumber = Math.floor(Math.random() * 499);
 
 // Create an array full of 'content' given in arg (Same format as grids)
 function createArray(content) {
@@ -53,13 +33,26 @@ function createArray(content) {
 
 const Grid = () => {
 	
-
-	const [userGrid, setUserGrid] = useState(grid);
+	const [userGrid, setUserGrid] = useState(grids[gridNumber].Grid);
+	const [solution, setSolution] = useState(grids[gridNumber].Solution);
 	const [colorsGrid, setColorsGrid] = useState(createArray(""));
 	const [textColorGrid, setTextColorGrid] = useState(createArray("black"))
 	const [selectedCell, setSelectedCell] = useState([0, 0, 0])
 	const [showDigitsSelector, setShowDigitsSelector] = useState(false);
 	const [scoreCounter, setScoreCounter] = useState(0);
+
+	// Reset all hooks
+	const resetGame = () => {
+
+		const gridNumber = Math.floor(Math.random() * 499);
+		setUserGrid(grids[gridNumber].Grid);
+		setSolution(grids[gridNumber].Solution);
+
+		setColorsGrid(createArray(""));		
+		setTextColorGrid(createArray("black"));
+		setScoreCounter(0);
+	}
+
 
 	// Get digit selected in digitsSelector and add it in the grid
 	const selectDigit = (digit) => {
@@ -89,10 +82,12 @@ const Grid = () => {
 			setScoreCounter(scoreCounter + 1);
 		}
 
-		// Check if the grid is full if yes end game
+		// Check if the grid is full if yes end game and start a new one
 		if (JSON.stringify(userGrid) === JSON.stringify(solution)) {
 
 			alert("Congratulation ! Completed with " + scoreCounter + " errors !")
+
+			resetGame();
 		}
 
 	}
