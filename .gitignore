@@ -9,3 +9,5 @@ client/node_modules
 .idea/
 /Pipfile
 /Pipfile.lock
+
+./client/build

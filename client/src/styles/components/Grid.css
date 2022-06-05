@@ -17,16 +17,37 @@
 		width: 450px;
 	}
 
-	.grid__big-square {
-		display: flex;
-		flex-direction: row;
-		flex-flow: row wrap;
+		.grid__big-square {
+			display: flex;
+			flex-direction: row;
+			flex-flow: row wrap;
 
-		height: 150px;
-		width: 150px;
+			height: 150px;
+			width: 150px;
 
-		border: 1px black solid;
+			border: 1px black solid;
 
-		background-color: black;
+			background-color: black;
+		}
+
+
+@media (max-width: 550px) {
+
+	.grid-box {
+
+		height: 320px;
 	}
+
+		.grid-box__grid {
+
+			height: 225px;
+			width: 225px;
+		}
+
+			.grid__big-square {
+
+				height: 75px;
+				width: 75px;
+			}
+}
 
