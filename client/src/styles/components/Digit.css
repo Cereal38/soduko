@@ -1,0 +1,26 @@
+
+.digit {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+
+	height: 49px;
+	width: 49px;
+
+	font-size: 30px;
+
+	user-select: none;
+	-webkit-user-select: none;
+	-khtml-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+
+	border: black 1px solid;
+
+	background-color: white;
+}
+
+	.digit:hover {
+
+		-webkit-filter:brightness(75%);
+	}

@@ -1,0 +1,19 @@
+
+.score-panel {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+
+	height: 40px;
+	width: 100px;
+
+	border: 1px solid black;
+	border-radius: 5px;
+
+	background-color: white;
+}
+
+	.score-panel__text {
+
+		background-color: inherit;
+	}
