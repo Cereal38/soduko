@@ -4,7 +4,7 @@
 	justify-content: center;
 	align-items: center;
 
-	height: 65vh;
+	height: 70vh;
 }
 
 	.home__play-button {
@@ -21,3 +21,15 @@
 
 		background-color: #CCCCAA;
 	}
+
+
+/* Mobiles width : 550px */
+@media (max-width: 550px) {
+
+	.home__play-button {
+		
+		padding: 25px 100px 25px 100px;
+
+		font-size: 2em;
+	}
+}

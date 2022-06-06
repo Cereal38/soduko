@@ -5,6 +5,7 @@ import '../styles/pages/Game.css';
 
 import Grid from '../components/Grid.js';
 import Header from '../components/Header.js';
+import Footer from '../components/Footer.js';
 
 const Game = () => {
 
@@ -12,9 +13,12 @@ const Game = () => {
 
 		<>	
 			<Header />
+
 			<div className="game-page">
 				<Grid />
 			</div>
+
+			<Footer />
 		</>	
 	);
 }

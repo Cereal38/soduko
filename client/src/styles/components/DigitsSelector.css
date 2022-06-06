@@ -33,3 +33,33 @@
 
 			-webkit-filter:brightness(75%);
 		}
+
+@media (max-width: 550px) {
+
+	.digits-selector {
+
+		height: 33px;
+		width: 300px;
+	}	
+
+		.digits-selector__digit {
+
+			height: 33px;
+			width: 33px;
+		}
+}
+
+@media (max-width: 350px) {
+
+	.digits-selector {
+
+		height: 25px;
+		width: 225px;
+	}	
+
+		.digits-selector__digit {
+
+			height: 25px;
+			width: 25px;
+		}
+}
