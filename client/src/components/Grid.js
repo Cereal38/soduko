@@ -92,10 +92,6 @@ const Grid = () => {
 
 	}
 
-	// Allow to refresh components (MAYBE DELETE)
-	const [refresh, setRefresh] = useState(0);
-	function refreshCompo() { setRefresh(refresh+1); }
-
 	// When a cell is clicked on the grid
 	function emptyClicked(indexBlock, indexLine, indexDigit) {
 

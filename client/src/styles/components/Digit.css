@@ -25,8 +25,18 @@
 		-webkit-filter:brightness(75%);
 	}
 
-
 @media (max-width: 550px) {
+
+	.digit {
+
+		height: 32px;
+		width: 32px;
+
+		font-size: 20px;
+	}
+}
+
+@media (max-width: 350px) {
 
 	.digit {
 

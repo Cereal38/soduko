@@ -15,7 +15,7 @@ const Digit = (props) => {
 			color: props.textColor
 		}}
 		>
-			{props.digit == 0 ? "" : props.digit}
+			{props.digit === 0 ? "" : props.digit}
 		</div>
 	);
 }

@@ -30,8 +30,28 @@
 			background-color: black;
 		}
 
-
 @media (max-width: 550px) {
+
+	.grid-box {
+
+		height: 400px;
+	}
+
+		.grid-box__grid {
+
+			height: 300px;
+			width: 300px;
+		}
+
+			.grid__big-square {
+
+				height: 100px;
+				width: 100px;
+			}
+}
+
+
+@media (max-width: 350px) {
 
 	.grid-box {
 
